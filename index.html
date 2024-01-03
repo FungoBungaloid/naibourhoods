@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Melbourne Suburbs Map</title>
+    <title>N-AI-bourhoods in Melbourne</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-
-
 </head>
-<body>
+<body style="background-color:#010911">
     <div id="map"></div>
     <div id="info">
-        <img id="suburbImage" src="" alt="Suburb Image">
-        <h3 id="suburbName"></h3>
-        <p id="personName"></p>
-        <p id="personAge"></p>
-        <p id="personOccupation"></p>
-        <p id="personQuote"></p>
-        <!-- Add more fields as necessary -->
+        <div id="suburbName" class="textElement"></div>
+        <div id="personQuote" class="textElement quote"></div>
+        <div id="personDetails" class="textElement"></div>
+        <div id="personOccupation" class="textElement"></div>
     </div>
     
+    <img id="backgroundImage1" src="" alt="Suburb Image" class="backgroundImage">
+    <img id="backgroundImage2" src="" alt="Suburb Image" class="backgroundImage">
+
+    <button id="aboutButton">?</button> <!-- About Button -->
+    <div id="aboutPopup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <p>None of these Melburnians exist.
+                <br>
+                Their ages, occupations, personalities and quotes are generated with GPT-4, and their images are created by Midjourney V6.
+            </p>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 </html>
