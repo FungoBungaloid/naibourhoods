@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var aboutPopup = document.getElementById('aboutPopup');
     var closeButton = document.querySelector('.close');
 
-    // Show the popup when the About button is clicked
+    // Show the popup when the About button is clicked, or hide it if it's already visible
     aboutButton.onclick = function() {
-        aboutPopup.style.display = 'block';
+        aboutPopup.style.display = aboutPopup.style.display === 'block' ? 'none' : 'block';
     };
 
     // Close the popup when the Close button (x) is clicked
@@ -26,9 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
         aboutPopup.style.display = 'none';
     };
 
-    // Close the popup when clicking outside of it
+    // Close the popup when clicking anywhere outside of it
     window.onclick = function(event) {
-        if (event.target === aboutPopup) {
+        if (event.target !== aboutButton && event.target !== aboutPopup && !aboutPopup.contains(event.target)) {
             aboutPopup.style.display = 'none';
         }
     };
@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const mapContainer = map.getContainer();
     mapContainer.style.opacity = 0; // Initially set opacity to 0
 
+
+
+
     // Function to handle mouse movement
     function handleMouseMove() {
         if (canChangeOpacity) {
@@ -56,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 3000);
         }
     }
-
     // Function to handle map clicks
     function handleMapClick() {
         if (canChangeOpacity) {
@@ -65,6 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+
+
+    
     // Enable interactions with the map after 3 seconds
     setTimeout(() => {
         canChangeOpacity = true; // Allow opacity changes after 3 seconds
@@ -99,9 +104,9 @@ document.addEventListener('DOMContentLoaded', function() {
             click: showSuburbData
         });
 
-        if (feature.properties && feature.properties.name) {
-            layer.bindTooltip(feature.properties.name, {
-                permanent: true,
+        if (feature.properties && feature.properties.SSC_NAME) {
+            layer.bindTooltip(feature.properties.SSC_NAME, {
+                permanent: false, // Changed this line
                 direction: 'center',
                 className: 'label'
             });
@@ -115,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
             weight: 5,
             color: '#33ccff',
             dashArray: '',
-            fillOpacity: 0.2
+            fillOpacity: 0.5
         });
     }
 
@@ -130,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
         weight: 2,
         color: "#33ccff",
         dashArray: '',
-        fillOpacity: 0.1
+        fillOpacity: 0
     };
 
     // Function to create and append text elements
