@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         zoomControl: false,
         minZoom: 9,
         maxZoom: 14
-    }).setView([-37.8136, 144.9631], 10);
+    }).setView([-37.8136, 144.9631], 11);
 
     // Move the attribution control to the top left corner
     map.attributionControl.setPosition('bottomright');
@@ -98,6 +98,14 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             click: showSuburbData
         });
+
+        if (feature.properties && feature.properties.name) {
+            layer.bindTooltip(feature.properties.name, {
+                permanent: true,
+                direction: 'center',
+                className: 'label'
+            });
+        }
     }
 
     // Highlight feature on mouseover
@@ -133,8 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
         elem.style.animation = animation;
         container.appendChild(elem);
     }
-
-
 
     let currentImage = 1;
 

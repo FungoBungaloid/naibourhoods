@@ -58,6 +58,12 @@ body, html {
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.9);
 }
 
+.label {
+    color: white;
+    z-index: 2;
+    text-shadow: 2px 2px 2px black;
+}
+
 /* Remove default tooltip arrows */
 .leaflet-tooltip-top:before,
 .leaflet-tooltip-bottom:before,
@@ -112,9 +118,25 @@ body, html {
 }
 
 /* Styles for text elements */
-#suburbName { font-size: 7vh; font-family: 'Arial', sans-serif; }
-#personQuote { font-size: 5vh; font-style: italic; font-family: 'Times New Roman', serif; }
-#personDetails, #personOccupation { font-size: 3.5vh; }
+#suburbName {
+    font-size: 7vh;
+    font-family: 'Questrial', sans-serif;
+}
+
+#personQuote {
+    font-size: 4.5vh;
+    font-style: italic;
+    font-family: 'Quattrocento', serif;
+    line-height: 1.1;
+}
+
+#personDetails, #personOccupation {
+    font-size: 3.5vh;
+    font-family: 'Questrial', sans-serif;
+}
+
+
+
 
 /* Animation for text elements */
 @keyframes fadeInSlide {
