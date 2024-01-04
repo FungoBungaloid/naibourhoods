@@ -65,7 +65,8 @@ body, html {
 }
 
 /* Apply zoom animation */
-#backgroundImage.visible {
+.backgroundImage.visible {
+    opacity: 1;
     animation: zoom 45s ease forwards;
 }
 

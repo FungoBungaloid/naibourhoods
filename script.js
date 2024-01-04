@@ -165,10 +165,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
             // Wait for the new image to load before starting the crossfade
             showImage.onload = () => {
+                showImage.classList.add('visible'); // Add the 'visible' class to start the animation
                 showImage.style.opacity = 1;
+                
+                hideImage.classList.remove('visible'); // Remove the 'visible' class from the hidden image
                 hideImage.style.opacity = 0;
             };
-    
+
+
             // Update text elements
             updateTextElement('suburbName', suburbName);
             updateTextElement('personQuote', data.Blurb, true); // true for slide-in effect
