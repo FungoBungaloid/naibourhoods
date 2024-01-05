@@ -160,22 +160,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const showImage = currentImage === 1 ? image1 : image2;
             const hideImage = currentImage === 1 ? image2 : image1;
     
-            // Set new image source
+            // Set new image source for the showImage
             showImage.src = 'images/' + suburbName + '.jpg';
     
             // Wait for the new image to load before starting the crossfade
             showImage.onload = () => {
-                showImage.classList.add('visible'); // Add the 'visible' class to start the animation
-                showImage.style.opacity = 1;
+                showImage.classList.add('visible'); // Start zoom animation for new image
+                showImage.style.opacity = 1; // Fade in new image
                 
-                hideImage.classList.remove('visible'); // Remove the 'visible' class from the hidden image
-                hideImage.style.opacity = 0;
+                hideImage.style.opacity = 0; // Fade out old image without changing its zoom state
             };
-
-
+    
+            // No need to remove 'visible' class immediately from the hideImage
+    
             // Update text elements
             updateTextElement('suburbName', suburbName);
-            updateTextElement('personQuote', data.Blurb, true); // true for slide-in effect
+            updateTextElement('personQuote', data.Blurb, true);
             updateTextElement('personDetails', `${data.Name}, ${data.Age}`);
             updateTextElement('personOccupation', data.Occupation);
     
@@ -183,6 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
             currentImage = currentImage === 1 ? 2 : 1;
         }
     }
+    
     
 
     function updateTextElement(elementId, newText, isQuote = false) {
