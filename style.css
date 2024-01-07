@@ -17,8 +17,6 @@ body, html {
     transition: transform 1s ease, opacity 1s ease; /* Synchronize duration with other texts */
 }
 
-
-
 /* Styles for the background image */
 .backgroundImage {
     position: fixed;
@@ -31,7 +29,6 @@ body, html {
     opacity: 0;
     transition: opacity 2s ease;
 }
-
 
 /* Make the image visible */
 #backgroundImage.visible {
@@ -53,25 +50,22 @@ body, html {
     padding: 0 !important;
     font-weight: bold !important;
     color: white !important;
-    font-size: 14px !important;
+    font-size: 26px !important;
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.9) !important;
     z-index: 2 !important;
 }
 
-/* Animation for background image zoom */
+/* Animation for background image zoom in and zoom out */
 @keyframes zoom {
-    from { transform: scale(1); }
-    to { transform: scale(1.15); }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
 }
 
-/* Apply zoom animation */
+/* Apply zoom animation with continuous loop */
 .backgroundImage.visible {
     opacity: 1;
-    animation: zoom 45s ease forwards;
+    animation: zoom 90s ease-in-out forwards infinite;
 }
-
-
-
 
 /* Style for the map container */
 #map {
@@ -87,6 +81,7 @@ body, html {
     animation-delay: 3s;
     transition: opacity 3s ease;
 }
+
 
 /* Animation for map elements */
 @keyframes fadeIn {
@@ -136,13 +131,56 @@ body, html {
     top: 20px;
     right: 20px;
     z-index: 3; /* Above other elements */
-    background-color: #fff;
-    border: none;
+    background-color: #ffffff;
+    border: 2px solid #000;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     font-weight: bold;
     cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Tooltip base style */
+.tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 4;
+    top: 100%; /* Position below the button */
+    left: 50%; /* Start from the center of the button */
+    transform: translateX(-100%); /* Shift tooltip to the left */
+    opacity: 0;
+    font-size: 12px;
+    transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* Arrow at the bottom of the tooltip */
+    left: 90%; /* Adjust this to align the arrow as needed */
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+/* Show tooltip on hover */
+#aboutButton:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
 }
 
 /* General style for the popup */

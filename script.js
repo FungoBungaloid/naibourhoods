@@ -48,33 +48,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+    let lastClickTime = 0;
+    let isMapInverted = false;
+    let originalView = { lat: -37.8136, lon: 144.9631, zoom: 11 };
 
-    // Function to handle mouse movement
     function handleMouseMove() {
-        if (canChangeOpacity) {
-            clearTimeout(mouseMoveTimeout);
-            mapContainer.style.opacity = 1;
-            mouseMoveTimeout = setTimeout(() => {
-                mapContainer.style.opacity = 0;
-            }, 3000);
+        if (Date.now() - lastClickTime > 3000 && isMapInverted) {
+            map.setView([originalView.lat, originalView.lon], originalView.zoom); // Return to original position
+            isMapInverted = false;
         }
     }
-    // Function to handle map clicks
+
     function handleMapClick() {
-        if (canChangeOpacity) {
-            mapContainer.style.opacity = 0;
-            // Additional logic for click behavior
-        }
+        lastClickTime = Date.now();
+        // Store current map position
+        const currentCenter = map.getCenter();
+        originalView = { lat: currentCenter.lat, lon: currentCenter.lng, zoom: map.getZoom() };
+
+        map.setView([37.8136, 144.9631], 11); // Invert latitude
+        isMapInverted = true;
     }
-
-
-
-    
-    // Enable interactions with the map after 3 seconds
-    setTimeout(() => {
-        canChangeOpacity = true; // Allow opacity changes after 3 seconds
-        mapContainer.style.opacity = 1; // Make map visible
-    }, 3000);
 
     // Attach event listeners to the map for mouse movement and clicks
     map.on('mousemove', handleMouseMove);
@@ -84,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function style(feature) {
         return {
             weight: 3,
-            color: "#33ccff",
+            color: "rgba(51, 204, 255, 0.6)",
             dashArray: '',
             fillOpacity: 0.0,
             fillColor: '#33ccff',
@@ -130,10 +123,10 @@ document.addEventListener('DOMContentLoaded', function() {
         layer.setStyle(defaultStyle);
     }
 
-    // Default style for suburb boundaries
+    // Default style for suburb boundaries on mouseover
     const defaultStyle = {
         weight: 2,
-        color: "#33ccff",
+        color: "rgba(51, 204, 255, 0.6)",
         dashArray: '',
         fillOpacity: 0
     };
