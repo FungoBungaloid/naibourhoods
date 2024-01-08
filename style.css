@@ -120,6 +120,18 @@ body, html {
     font-family: 'Questrial', sans-serif;
 }
 
+/* Responsive styles for smaller screens */
+@media (max-width: 600px) { /* Adjust the max-width as needed */
+    #personQuote, #personDetails, #personOccupation {
+        font-size: 3vh; /* Reduce the font size on smaller screens */
+    }
+    #suburbName {
+        font-size: 5vh; /* Reduce the font size on smaller screens */
+    }
+}
+
+
+
 /* Animation for text elements */
 @keyframes fadeInSlide {
     to { opacity: 0.95; transform: translateX(0); }
@@ -229,4 +241,16 @@ body, html {
     justify-content: center;
     align-items: center;
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 600px) {
+    #aboutButton, #toggleMapButton {
+        width: 80px; /* Increase width */
+        height: 80px; /* Increase height */
+        font-size: 18px; /* Increase font size */
+    }
+    #toggleMapButton {
+        top: 120px; /* Increase width */
+    }
 }

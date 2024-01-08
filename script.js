@@ -54,8 +54,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isMapVisible) {
             map.getContainer().style.visibility = 'hidden'; // Hide map
             toggleMapButton.textContent = 'Show Map';
+            isMapInverted = true; // Ensure this is set to true when hiding the map
         } else {
             map.getContainer().style.visibility = 'visible'; // Show map
+            if (isMapInverted) {
+                map.setView([originalView.lat, originalView.lon], originalView.zoom); // Return to original position if inverted
+                isMapInverted = false;
+            }
             toggleMapButton.textContent = 'Hide Map';
         }
         isMapVisible = !isMapVisible;
@@ -135,6 +140,15 @@ document.addEventListener('DOMContentLoaded', function() {
         var layer = e.target;
         layer.setStyle(defaultStyle);
     }
+
+    function handleTouchMove() {
+        if (Date.now() - lastClickTime > 3000 && isMapInverted) {
+            map.setView([originalView.lat, originalView.lon], originalView.zoom); // Return to original position
+            isMapInverted = false;
+        }
+    }
+    
+    map.on('touchmove', handleTouchMove); // Handle touch events
 
     // Default style for suburb boundaries on mouseover
     const defaultStyle = {
