@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to handle reappearing of the map
     function handleMapAppearance() {
-        if (Date.now() - lastClickTime > 1000 && isMapInverted) {
+        if (Date.now() - lastClickTime > 3000 && isMapInverted) {
             map.setView([originalView.lat, originalView.lon], originalView.zoom); // Return to original position
             isMapInverted = false;
         }
