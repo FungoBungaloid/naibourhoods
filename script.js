@@ -47,6 +47,19 @@ document.addEventListener('DOMContentLoaded', function() {
     mapContainer.style.opacity = 0; // Initially set opacity to 0
 
 
+    const toggleMapButton = document.getElementById('toggleMapButton');
+    let isMapVisible = true;
+
+    toggleMapButton.addEventListener('click', function() {
+        if (isMapVisible) {
+            map.getContainer().style.visibility = 'hidden'; // Hide map
+            toggleMapButton.textContent = 'Show Map';
+        } else {
+            map.getContainer().style.visibility = 'visible'; // Show map
+            toggleMapButton.textContent = 'Hide Map';
+        }
+        isMapVisible = !isMapVisible;
+    });
 
     let lastClickTime = 0;
     let isMapInverted = false;

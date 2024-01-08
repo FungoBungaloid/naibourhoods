@@ -191,9 +191,11 @@ body, html {
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 4; /* Above other elements */
-    background-color: rgba(0, 0, 0, 0.8); /* Lightly transparent black */
+    background-color: rgba(0, 0, 0, 0.9); /* Lightly transparent black */
     padding: 20px;
     border-radius: 5px;
+    font-family: 'Questrial', sans-serif;
+    font-size: 1.5vh;
 }
 
 /* Style for the popup content */
@@ -208,4 +210,23 @@ body, html {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+}
+
+#toggleMapButton {
+    position: fixed;
+    right: 20px;
+    top: 80px;
+    z-index: 5;
+    background-color: #6eddff;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
 }
