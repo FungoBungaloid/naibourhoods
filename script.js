@@ -85,8 +85,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function for touch event
     function handleTouch() {
+        lastClickTime = 0;
         handleMapAppearance();
     }
+
+    // Attach event listener for touch events
+    map.getContainer().addEventListener('touchend', handleTouch); // Using addEventListener to ensure it's registered
 
     function handleMapClick() {
         lastClickTime = Date.now();
