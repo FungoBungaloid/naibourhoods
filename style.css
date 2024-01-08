@@ -121,7 +121,7 @@ body, html {
 }
 
 /* Responsive styles for smaller screens */
-@media (max-width: 600px) { /* Adjust the max-width as needed */
+@media (max-width: 1450px) { /* Adjust the max-width as needed */
     #personQuote, #personDetails, #personOccupation {
         font-size: 3vh; /* Reduce the font size on smaller screens */
     }
@@ -244,7 +244,7 @@ body, html {
 }
 
 /* Responsive styles for smaller screens */
-@media (max-width: 800px) {
+@media (max-width: 1450px) {
     #aboutButton, #toggleMapButton {
         width: 80px; /* Increase width */
         height: 80px; /* Increase height */
