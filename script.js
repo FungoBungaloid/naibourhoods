@@ -120,6 +120,11 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
+    function isMobileDevice() {
+        return 'ontouchstart' in window || /Mobi|Android/i.test(navigator.userAgent);
+    }
+
+
     // Define actions for each feature (suburb) in the GeoJSON layer
     function onEachFeature(feature, layer) {
         layer.on({
@@ -134,11 +139,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (feature.properties && feature.properties.SSC_NAME) {
             layer.bindTooltip(feature.properties.SSC_NAME, {
-                permanent: false, // Changed this line
+                permanent: false, 
                 direction: 'center',
                 className: 'label'
             });
         }
+
+        if (isMobileDevice() && feature.properties && feature.properties.SSC_NAME) {
+            layer.bindTooltip(feature.properties.SSC_NAME, {
+                permanent: false,
+                direction: 'center',
+                className: 'label',
+                opacity: 0 // Initially hidden
+            });
+        }
+
+    }
+
+    if (isMobileDevice()) {
+        // Update labels on zoom only for mobile devices
+        map.on('zoomend', function() {
+            var currentZoom = map.getZoom();
+            map.eachLayer(function(layer) {
+                if (layer.getTooltip) {
+                    var tooltip = layer.getTooltip();
+                    if (tooltip) {
+                        tooltip.setOpacity(currentZoom > 13 ? 1 : 0); // Adjust zoom level threshold as needed
+                    }
+                }
+            });
+        });
     }
 
     // Highlight feature on mouseover
