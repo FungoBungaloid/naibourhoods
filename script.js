@@ -70,11 +70,22 @@ document.addEventListener('DOMContentLoaded', function() {
     let isMapInverted = false;
     let originalView = { lat: -37.8136, lon: 144.9631, zoom: 11 };
 
-    function handleMouseMove() {
-        if (Date.now() - lastClickTime > 3000 && isMapInverted) {
+    // Function to handle reappearing of the map
+    function handleMapAppearance() {
+        if (Date.now() - lastClickTime > 1000 && isMapInverted) {
             map.setView([originalView.lat, originalView.lon], originalView.zoom); // Return to original position
             isMapInverted = false;
         }
+    }
+
+    // Function for mouse movement
+    function handleMouseMove() {
+        handleMapAppearance();
+    }
+
+    // Function for touch event
+    function handleTouch() {
+        handleMapAppearance();
     }
 
     function handleMapClick() {
@@ -90,6 +101,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Attach event listeners to the map for mouse movement and clicks
     map.on('mousemove', handleMouseMove);
     map.on('click', handleMapClick);
+    map.on('touchstart', handleTouch);
+    map.on('touchend', handleTouch);
 
     // Style function for GeoJSON layer
     function style(feature) {
