@@ -92,22 +92,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Attach event listener for touch events
     map.getContainer().addEventListener('touchend', handleTouch); // Using addEventListener to ensure it's registered
 
-    function handleMapClick() {
-        lastClickTime = Date.now();
-        // Store current map position
-        const currentCenter = map.getCenter();
-        originalView = { lat: currentCenter.lat, lon: currentCenter.lng, zoom: map.getZoom() };
-
-        map.setView([37.8136, 144.9631], 11); // Invert latitude
-        isMapInverted = true;
+    function handleMapClick(e) {
+        if (e.target.options.className === 'suburb-boundary') {
+            lastClickTime = Date.now();
+            // Store current map position
+            const currentCenter = map.getCenter();
+            originalView = { lat: currentCenter.lat, lon: currentCenter.lng, zoom: map.getZoom() };
+    
+            map.setView([37.8136, 144.9631], 11); // Invert latitude
+            isMapInverted = true;
+        }
     }
-
+    
     // Attach event listeners to the map for mouse movement and clicks
     map.on('mousemove', handleMouseMove);
     map.on('click', handleMapClick);
     map.on('touchstart', handleTouch);
     map.on('touchend', handleTouch);
-
+    
     // Style function for GeoJSON layer
     function style(feature) {
         return {
@@ -119,12 +121,11 @@ document.addEventListener('DOMContentLoaded', function() {
             className: 'suburb-boundary'
         };
     }
-
+    
     function isMobileDevice() {
         return 'ontouchstart' in window || /Mobi|Android/i.test(navigator.userAgent);
     }
-
-
+    
     // Define actions for each feature (suburb) in the GeoJSON layer
     function onEachFeature(feature, layer) {
         layer.on({
@@ -134,9 +135,12 @@ document.addEventListener('DOMContentLoaded', function() {
             mouseout: function(e) {
                 resetHighlight(e);
             },
-            click: showSuburbData
+            click: function(e) {
+                handleMapClick(e);
+                showSuburbData(e);
+            }
         });
-
+    
         if (feature.properties && feature.properties.SSC_NAME) {
             layer.bindTooltip(feature.properties.SSC_NAME, {
                 permanent: false, 
@@ -144,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 className: 'label'
             });
         }
-
+    
         if (isMobileDevice() && feature.properties && feature.properties.SSC_NAME) {
             layer.bindTooltip(feature.properties.SSC_NAME, {
                 permanent: false,
@@ -153,7 +157,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 opacity: 0 // Initially hidden
             });
         }
-
     }
 
     if (isMobileDevice()) {
