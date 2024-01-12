@@ -92,6 +92,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Attach event listener for touch events
+    if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
+        // If Safari
+        map.getContainer().addEventListener('click', handleTouch);
+    } else {
+        // If not Safari
+        map.getContainer().addEventListener('touchend', handleTouch);
+    }
+
+    // Attach event listener for touch events
     map.getContainer().addEventListener('touchend', handleTouch); // Using addEventListener to ensure it's registered
 
     function handleMapClick(e) {
