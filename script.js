@@ -80,24 +80,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Function for mouse movement
-    function handleMouseMove() {
+    // Function for touch event
+    function handleTouch() {
+        lastClickTime = Date.now();
         handleMapAppearance();
     }
 
-    // Function for touch event
-    function handleTouch() {
-        lastClickTime = 0;
-        handleMapAppearance();
+    // Function for mousemove event
+    function handleMouseMove() {
+        if (Date.now() - lastClickTime > 3000) {
+            handleMapAppearance();
+        }
     }
 
     // Attach event listener for touch events
     if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
         // If Safari
         map.getContainer().addEventListener('click', handleTouch);
+        map.getContainer().addEventListener('mousemove', handleMouseMove);
     } else {
         // If not Safari
         map.getContainer().addEventListener('touchend', handleTouch);
+        map.getContainer().addEventListener('mousemove', handleMouseMove);
     }
 
     // Attach event listener for touch events
