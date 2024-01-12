@@ -52,11 +52,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     toggleMapButton.addEventListener('click', function() {
         if (isMapVisible) {
-            map.getContainer().style.visibility = 'hidden'; // Hide map
+            map.getContainer().style.display = 'none'; // Hide map
             toggleMapButton.textContent = 'Show Map';
             isMapInverted = true; // Ensure this is set to true when hiding the map
         } else {
-            map.getContainer().style.visibility = 'visible'; // Show map
+            map.getContainer().style.display = 'block'; // Show map
             if (isMapInverted) {
                 map.setView([originalView.lat, originalView.lon], originalView.zoom); // Return to original position if inverted
                 isMapInverted = false;
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
             isMapInverted = false;
         }
     }
-
+    
     // Function for mouse movement
     function handleMouseMove() {
         handleMapAppearance();
