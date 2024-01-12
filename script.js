@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             map.getContainer().style.display = 'block'; // Show map
             if (isMapInverted) {
                 map.setView([originalView.lat, originalView.lon], originalView.zoom); // Return to original position if inverted
+                map.invalidateSize(); // Force a redraw of the map
                 isMapInverted = false;
             }
             toggleMapButton.textContent = 'Hide Map';
@@ -74,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleMapAppearance() {
         if (Date.now() - lastClickTime > 3000 && isMapInverted) {
             map.setView([originalView.lat, originalView.lon], originalView.zoom); // Return to original position
+            map.invalidateSize(); // Force a redraw of the map
             isMapInverted = false;
         }
     }
