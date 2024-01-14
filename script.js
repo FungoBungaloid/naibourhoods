@@ -268,9 +268,7 @@ document.addEventListener('DOMContentLoaded', function() {
             currentImage = currentImage === 1 ? 2 : 1;
         }
     }
-    
-    
-
+      
     function updateTextElement(elementId, newText, isQuote = false) {
         const element = document.getElementById(elementId);
         element.style.opacity = 0;

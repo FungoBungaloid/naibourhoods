@@ -21,6 +21,7 @@ So, have a wander through your digital neighborhood. It's a little glimpse into 
 
 ---
 
+
 *For those who cringe at calling these tools 'AI' because they aren't 'real' Artificial Intelligence: I hear you, I see you, I agree with you, but the battle has been lost.
 
 **As of January 2024, at least. Expect all of this to be obsolete in a few months!
