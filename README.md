@@ -1,4 +1,7 @@
 # Nonexistent Neighbours: Melbourne Imagined by AI
+
+https://fungobungaloid.github.io/naibourhoods/
+
 None of these Melburnians are real. They're all figments of AI's* imagination.
 
 I asked one AI to dream up what it believes a 'stereotypical resident' looks like for each suburb in Melbourne, and then asked another AI to show me a picture of them.
